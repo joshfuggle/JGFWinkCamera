@@ -35,6 +35,7 @@ JGFWinkCamera will let you know when key events have occurred:
 
     #pragma mark - JGFCameraDelegate
 
+    // Callback designed for you to provide feedback of an impending photo capture to your users.
     - (void)camera:(JGFWinkCamera *)camera willShutterIn:(NSTimeInterval)time
     {
         if ( time > 0 )
@@ -47,6 +48,7 @@ JGFWinkCamera will let you know when key events have occurred:
         }
     }
 
+    // Called when a photo is captured. This is your chance to save the photo.
     - (void)camera:(JGFWinkCamera *)camera didCapturePhoto:(UIImage *)photo
     {
         [self.lastCapture setImage:photo];
