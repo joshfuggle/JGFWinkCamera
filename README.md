@@ -7,7 +7,9 @@ This is a fun example of the power of AVFoundation.
 To use in your own app you need to create an instance of JGFWinkController, then you need to make that instance a child of one of your own view controllers.
 JGFWinkCamera doesn't come with any UI for capturing photos, you need to build that yourself. However, I believe that that is part of the flexibility of this project. You can create whatever UI you want.
 
-Sample usage:
+![Example](https://raw.githubusercontent.com/josh-fuggle/JGFWinkCamera/master/demo.gif)
+
+# Sample usage
 
     JGFWinkCamera *camera = [JGFWinkCamera cameraWithDelegate:self];
 
