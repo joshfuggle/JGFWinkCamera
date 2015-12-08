@@ -11,45 +11,49 @@ JGFWinkCamera doesn't come with any UI for capturing photos, you need to build t
 
 # Sample usage
 
-    JGFWinkCamera *camera = [JGFWinkCamera cameraWithDelegate:self];
+```objective-c
+JGFWinkCamera *camera = [JGFWinkCamera cameraWithDelegate:self];
 
-    if ( camera != nil )
-    {
-        [self addChildViewController:camera];
+if ( camera != nil )
+{
+    [self addChildViewController:camera];
 
-        camera.view.translatesAutoresizingMaskIntoConstraints = NO;
+    camera.view.translatesAutoresizingMaskIntoConstraints = NO;
 
-        [self.view addSubview:camera.view];
+    [self.view addSubview:camera.view];
 
-        NSDictionary *views = @{ @"camera" : camera.view };
+    NSDictionary *views = @{ @"camera" : camera.view };
 
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[camera]|" options:0 metrics:nil views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[camera]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[camera]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[camera]|" options:0 metrics:nil views:views]];
 
-        [self.view addSubview:camera.view];
+    [self.view addSubview:camera.view];
 
-        [camera didMoveToParentViewController:self];
-    }
+    [camera didMoveToParentViewController:self];
+}
+```
 
 JGFWinkCamera will let you know when key events have occurred:
 
-    #pragma mark - JGFCameraDelegate
+```objective-c
+#pragma mark - JGFCameraDelegate
 
-    // Callback designed for you to provide feedback of an impending photo capture to your users.
-    - (void)camera:(JGFWinkCamera *)camera willShutterIn:(NSTimeInterval)time
+// Callback designed for you to provide feedback of an impending photo capture to your users.
+- (void)camera:(JGFWinkCamera *)camera willShutterIn:(NSTimeInterval)time
+{
+    if ( time > 0 )
     {
-        if ( time > 0 )
-        {
-            [self _animateRemainingTime:time animationDuration:camera.feedbackIntervalWhileWaitingForShutter];
-        }
-        else
-        {
-            [self _animateShutter];
-        }
+        [self _animateRemainingTime:time animationDuration:camera.feedbackIntervalWhileWaitingForShutter];
     }
+    else
+    {
+        [self _animateShutter];
+    }
+}
 
-    // Called when a photo is captured. This is your chance to save the photo.
-    - (void)camera:(JGFWinkCamera *)camera didCapturePhoto:(UIImage *)photo
-    {
-        [self.lastCapture setImage:photo];
-    }
+// Called when a photo is captured. This is your chance to save the photo.
+- (void)camera:(JGFWinkCamera *)camera didCapturePhoto:(UIImage *)photo
+{
+    [self.lastCapture setImage:photo];
+}
+```
